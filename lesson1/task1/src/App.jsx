@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 /* eslint-disable import/no-unresolved */
 import React, { useState } from "react";
 import ThemedButton from "./ThemedButton";
@@ -7,11 +8,7 @@ const App = () => {
   const [theme, setTheme] = useState(themes.light);
 
   const ToggleBtn = () => {
-    if (theme === themes.light) {
-      setTheme(themes.dark);
-    }
-
-    setTheme(themes.light);
+    theme === themes.light ? setTheme(themes.dark) : setTheme(themes.light);
   };
 
   return (
