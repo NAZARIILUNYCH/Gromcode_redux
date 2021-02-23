@@ -8,7 +8,7 @@ const App = () => {
   const [theme, setTheme] = useState(themes.light);
 
   const ToggleBtn = () => {
-    theme === themes.dark ? setTheme(themes.light) : setTheme(themes.dark);
+    theme === themes.light ? setTheme(themes.dark) : setTheme(themes.light);
   };
 
   return (
