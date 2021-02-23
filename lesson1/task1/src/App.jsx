@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 /* eslint-disable import/no-unresolved */
 import React from "react";
 import ThemedButton from "./ThemedButton";
@@ -6,7 +5,7 @@ import { ThemeContext, themes } from "./themes-context";
 
 class App extends React.Component {
   state = {
-    theme: themes.dark,
+    theme: themes.light,
   };
 
   toggleTheme = () => {
