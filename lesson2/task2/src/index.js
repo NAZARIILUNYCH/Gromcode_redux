@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-expressions */
 import "./index.scss";
 import store, { increment, decrement, reset } from "./store";
 
@@ -21,8 +20,6 @@ const onReset = () => {
 
 store.subscribe(() => {
   const state = store.getState();
-  state.history[0] === "+1" ? (state.history[0] = 1) : "";
-
   const currentValue = state.history.reduce((acc, value) => acc + +value, 0);
   const historyString = state.history.join("");
 
