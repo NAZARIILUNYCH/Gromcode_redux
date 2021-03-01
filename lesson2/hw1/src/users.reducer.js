@@ -13,7 +13,7 @@ const usersReducer = (state = initialState, action) => {
     case DELETEUSER:
       return {
         ...state,
-        usersList: [...state.filter((user) => user.id !== action.payload.id)],
+        usersList: state.usersList.filter((user) => user.id === action.payload),
       };
 
     default:
