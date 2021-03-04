@@ -14,8 +14,8 @@ store.dispatch(increment);
 store.dispatch(reset);
 
 store.dispatch(addUser({ id: 1, name: "A" }));
-store.dispatch(addUser({ id: 2, name: "B" }));
+store.dispatch(addUser({ id: 76, name: "Sarah" }));
 
-store.dispatch(deleteUser(1));
+store.dispatch(deleteUser(76));
 
 store.dispatch(updateUser(2, { name: "Bob Martin", age: 17 }));
