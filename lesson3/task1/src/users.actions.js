@@ -20,6 +20,6 @@ export const updateUser = (id, userData) => ({
   type: UPDATE_USER,
   payload: {
     id,
-    ...userData,
+    userData,
   },
 });
