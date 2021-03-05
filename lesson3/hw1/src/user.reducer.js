@@ -1,6 +1,10 @@
 import { SET_USER, REMOVE_USER } from './user.actions';
 
-export const userReducer = (state = null, action) => {
+const initialState = {
+  user: null,
+};
+
+export const userReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER:
       return {
