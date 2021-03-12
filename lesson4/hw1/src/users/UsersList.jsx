@@ -19,6 +19,7 @@ class UsersList extends React.Component {
     const itemsPerPage = 3;
 
     const start = users.currentPage * itemsPerPage;
+    const end = start + itemsPerPage;
 
     return (
       <div>
@@ -30,7 +31,7 @@ class UsersList extends React.Component {
           itemsPerPage={itemsPerPage}
         />
         <ul className="users">
-          {users.usersList.slice(start, start + itemsPerPage).map(user => (
+          {users.usersList.slice(start, end).map(user => (
             <User key={user.id} {...user} />
           ))}
         </ul>
