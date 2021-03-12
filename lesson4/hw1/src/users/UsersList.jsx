@@ -6,35 +6,32 @@ import User from './User';
 import * as userActions from './users.actions';
 
 class UsersList extends React.Component {
-  prevPage = () => {
+  goPrev = () => {
     this.props.prevPage();
   };
 
-  nextPage = () => {
+  goNext = () => {
     this.props.nextPage();
   };
 
   render() {
-    const { users, start, end } = this.props;
-
+    const { users } = this.props;
     const itemsPerPage = 3;
-    const totalItems = users.length;
-    const currentPage = end / itemsPerPage;
+
+    const start = users.currentPage * itemsPerPage;
 
     return (
       <div>
         <Pagination
-          goPrev={this.prevPage}
-          goNext={this.nextPage}
-          currentPage={currentPage}
-          totalItems={totalItems}
+          goPrev={this.goPrev}
+          goNext={this.goNext}
+          currentPage={users.currentPage}
+          totalItems={users.usersList.length}
           itemsPerPage={itemsPerPage}
         />
         <ul className="users">
-          {users.slice(start, end).map(user => (
-            <li key={user.id} className="user">
-              <User name={user.name} age={user.age} />
-            </li>
+          {users.usersList.slice(start, start + itemsPerPage).map(user => (
+            <User key={user.id} {...user} />
           ))}
         </ul>
       </div>
@@ -44,8 +41,10 @@ class UsersList extends React.Component {
 
 const mapState = state => {
   return {
-    start: state.users.start,
-    end: state.users.end,
+    users: {
+      usersList: state.users.usersList,
+      currentPage: state.users.currentPage,
+    },
   };
 };
 

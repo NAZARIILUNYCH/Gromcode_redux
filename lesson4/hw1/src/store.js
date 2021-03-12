@@ -4,7 +4,6 @@ import usersReducer from './users/users.reducer';
 
 const reducer = combineReducers({
   users: usersReducer,
-  counter: 0,
 });
 
 const store = createStore(
