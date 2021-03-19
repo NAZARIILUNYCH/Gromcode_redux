@@ -2,16 +2,17 @@ import { fetchWeatherData } from './weather.gateway';
 
 export const WEATHER_DATA = 'WEATHER_DATA';
 
-export const weatherData = weatherFetching => ({
+export const weatherDataAction = weatherData => ({
   type: WEATHER_DATA,
   payload: {
-    weatherFetching,
+    weatherData,
   },
 });
 
-export const getWeatherData = () =>
-  function (dispatch) {
+export const getWeatherData = () => {
+  return function (dispatch) {
     fetchWeatherData().then(response => {
-      dispatch(weatherData(response));
+      dispatch(weatherDataAction(response));
     });
   };
+};

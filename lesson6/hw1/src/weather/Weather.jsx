@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { fetchingSelector } from './weather.selectors';
+import { weatherSelector } from './weather.selectors';
 import * as weatherActions from './weather.actions';
 
 const Weather = ({ getWeatherData, weatherData }) => {
@@ -24,7 +24,7 @@ const Weather = ({ getWeatherData, weatherData }) => {
 };
 
 const mapState = state => ({
-  weatherData: fetchingSelector(state),
+  weatherData: weatherSelector(state),
 });
 
 const mapDispatch = {

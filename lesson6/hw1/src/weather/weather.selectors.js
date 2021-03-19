@@ -1,1 +1,1 @@
-export const fetchingSelector = state => state.weatherData.weather;
+export const weatherSelector = state => state.weatherData.weatherData;

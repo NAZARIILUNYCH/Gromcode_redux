@@ -1,7 +1,7 @@
 import { WEATHER_DATA } from './weather.actions';
 
 const initialState = {
-  weather: [],
+  weatherData: [],
 };
 
 const weatherDataReducer = (state = initialState, action) => {
@@ -9,7 +9,7 @@ const weatherDataReducer = (state = initialState, action) => {
     case WEATHER_DATA:
       return {
         ...state,
-        weather: action.payload.weatherFetching,
+        weatherData: action.payload.weatherData,
       };
 
     default:
