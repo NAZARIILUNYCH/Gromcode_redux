@@ -1,53 +1,39 @@
 /* eslint-disable no-shadow */
-/* eslint-disable import/no-unresolved */
-import * as tasksGateway from './components/tasksGateway';
 import { tasksListSelector } from './tasks.selectors';
+import * as tasksGateway from './tasksGateway';
 
-export const TASKS_LIST_RECIEVED = 'TASKS_LIST_RECIEVED';
+export const TASKS_LIST_RECEIVED = 'TASKS_LIST_RECEIVED';
 
-export const tasksListRecieved = tasksList => {
-  return {
-    type: TASKS_LIST_RECIEVED,
-    payload: {
-      tasksList,
-    },
+export const tasksListReceived = tasksList => ({
+  type: TASKS_LIST_RECEIVED,
+  payload: {
+    tasksList,
+  },
+});
+
+export const getTaskList = () => dispatch =>
+  tasksGateway.fetchTasksList().then(tasksList => dispatch(tasksListReceived(tasksList)));
+
+export const updateTask = taskId => (dispatch, getState) => {
+  const state = getState();
+  const tasksList = tasksListSelector(state);
+  const task = tasksList.find(task => task.id === taskId);
+  const updatedTask = {
+    ...task,
+    done: !task.done,
   };
+  tasksGateway.updateTask(taskId, updatedTask).then(() => dispatch(getTaskList()));
 };
 
-export const getTasksList = () => {
-  return function (dispatch) {
-    tasksGateway.fetchTasksList().then(tasksList => dispatch(tasksListRecieved(tasksList)));
-  };
-};
+export const deleteTask = taskId => dispatch =>
+  tasksGateway.deleteTask(taskId).then(() => dispatch(getTaskList()));
 
-export const updateTask = taskId => {
-  const thunkAction = function (dispatch, getState) {
-    const state = getState();
-    const tasksList = tasksListSelector(state);
-    const task = tasksList.find(task => task.id === taskId);
-    const updatedTask = {
-      ...task,
-      done: !task.done,
-    };
-    tasksGateway.updateTask(taskId, updatedTask).then(() => dispatch(getTasksList()));
+export const createTask = text => dispatch => {
+  const taskData = {
+    text,
+    done: false,
+    createData: new Date().toISOString(),
   };
-  return thunkAction;
-};
 
-export const deleteTask = taskId => {
-  return function (dispatch) {
-    tasksGateway.deleteTask(taskId).then(() => dispatch(getTasksList()));
-  };
-};
-
-export const createTask = text => {
-  return function (dispatch) {
-    const taskData = {
-      text,
-      done: false,
-      createdDate: new Date().toISOString(),
-    };
-
-    tasksGateway.createTask(taskData).then(() => dispatch(getTasksList()));
-  };
+  tasksGateway.createTask(taskData).then(() => dispatch(getTaskList()));
 };

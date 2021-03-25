@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-class CreateTaskInput extends React.Component {
+class CreateTaskInput extends Component {
   state = {
     value: '',
   };
 
-  handleChange = e => {
+  handleChange = event => {
     this.setState({
-      value: e.target.value,
+      value: event.target.value,
     });
   };
 
